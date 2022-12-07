@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -74,7 +76,7 @@ public class CSVReader_Writer {
         BufferedReader reader = null;
 
         reader = Files.newBufferedReader(Paths.get("lastnames.txt"));
-        if (reader == null) throw new IOException("File Path is not Valid")
+        if (reader == null) throw new IOException("File Path is not Valid");
         names = reader.lines()
                 .flatMap(line -> Stream.of(line.split(",")))
                 .collect(Collectors.toList());
@@ -83,33 +85,40 @@ public class CSVReader_Writer {
 
 
     public static void saveLastNames(List<String> lastNames) {
-
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("lastnames.txt"));
-        for (String toWrite : lastNames) {
-            writer.append(toWrite + ",");
+        Path path = Paths.get("lastnames.txt");
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+            for (String toWrite : lastNames) {
+                writer.append(toWrite + ",");
+            }
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        writer.flush();
     }
 
     public static void saveFemaleNames(List<String> femaleNames) {
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("firstname_female.txt"));
-        for (String toWrite : femaleNames) {
-            writer.append(toWrite + ",");
+        Path path = Paths.get("firstname_female.txt");
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+            for (String toWrite : femaleNames) {
+                writer.append(toWrite + ",");
+            }
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        writer.flush();
 
     }
 
 
     public static void saveMaleNames(List<String> maleNames) {
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("firstname_males.txt"));
-        for (String toWrite : maleNames) {
-            writer.append(toWrite + ",");
+        Path path = Paths.get("firstname_males.txt");
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+            for (String toWrite : maleNames) {
+                writer.append(toWrite + ",");
+            }
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        writer.flush();
-
-
     }
-
-
 }
