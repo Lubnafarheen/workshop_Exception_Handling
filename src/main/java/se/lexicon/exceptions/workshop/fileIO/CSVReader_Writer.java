@@ -7,40 +7,46 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.nio.file.Files.newBufferedReader;
+import static java.util.stream.Collectors.toList;
+
 public class CSVReader_Writer {
+
+    private static List<String> readToList(BufferedReader reader) {
+        return reader.lines()
+                .flatMap(line -> Stream.of(line.split(",")))
+                .collect(toList());
+    }
+
     /**
      * This method getMaleFirstNames should use a try-catch-finally without resources
      * Should catch FileNotFoundException and IOException
      * You should also close the Buffered reader in the finally block
      *
-     * @return List<String>of male firstnames
+     * @return List<String> of male firstnames
      */
     public static List<String> getMaleFirstNames() {
-
         BufferedReader reader = null;
-        List<String> names = null;
         try {
-            reader = Files.newBufferedReader(Paths.get("firstname_males.txt"));
-            names = reader.lines()
-                    .flatMap(line -> Stream.of(line.split(",")))
-                    .collect(Collectors.toList());
+            Path path = Paths.get("firstname_males.txt");
+            reader = newBufferedReader(path);
+            return readToList(reader);
         } catch (IOException e) {
-            System.out.println(e);
+            System.err.println(e.getMessage());
         } finally {
             try {
                 if (reader != null)
                     reader.close();
             } catch (IOException e) {
-                System.out.println(e);
+                System.err.println(e.getMessage());
             }
         }
-        return names;
+        return Collections.emptyList();
     }
-
 
     /**
      * This method getFemaleFirstNames should make use of a try-catch with resources
@@ -48,17 +54,13 @@ public class CSVReader_Writer {
      * @return
      */
     public static List<String> getFemaleFirstNames() {
-
-        List<String> names = null;
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get("firstname_female.txt"));
-        ) {
-            names = reader.lines()
-                    .flatMap(line -> Stream.of(line.split(",")))
-                    .collect(Collectors.toList());
+        Path path = Paths.get("firstname_female.txt");
+        try (BufferedReader reader = newBufferedReader(path)) {
+            return readToList(reader);
         } catch (IOException e) {
-            System.out.println(e);
+            System.err.println(e.getMessage());
         }
-        return names;
+        return Collections.emptyList();
     }
 
 
@@ -71,16 +73,9 @@ public class CSVReader_Writer {
      * @throws IOException
      */
     public static List<String> getLastNames() throws IOException {
-
-        List<String> names = null;
-        BufferedReader reader = null;
-
-        reader = Files.newBufferedReader(Paths.get("lastnames.txt"));
-        if (reader == null) throw new IOException("File Path is not Valid");
-        names = reader.lines()
-                .flatMap(line -> Stream.of(line.split(",")))
-                .collect(Collectors.toList());
-        return names;
+        try (BufferedReader reader = newBufferedReader(Paths.get("lastnames.txt"))) {
+            return readToList(reader);
+        }
     }
 
 
@@ -92,7 +87,7 @@ public class CSVReader_Writer {
             }
             writer.flush();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -104,7 +99,7 @@ public class CSVReader_Writer {
             }
             writer.flush();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
 
     }
@@ -118,7 +113,7 @@ public class CSVReader_Writer {
             }
             writer.flush();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }
