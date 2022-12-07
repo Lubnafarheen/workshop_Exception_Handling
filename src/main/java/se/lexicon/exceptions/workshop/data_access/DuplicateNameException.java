@@ -1,7 +1,16 @@
 package se.lexicon.exceptions.workshop.data_access;
 
-public final class DuplicateNameException extends IllegalArgumentException {
-    public DuplicateNameException(String message) {
-        super(message);
+public class DuplicateNameException extends IllegalArgumentException {
+
+    private final String name;
+
+
+    public DuplicateNameException(String name) {
+        super();
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

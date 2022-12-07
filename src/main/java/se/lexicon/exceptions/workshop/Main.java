@@ -28,8 +28,9 @@ public class Main {
             Person test = nameService.getNewRandomPerson();
             System.out.println(test);
 
-            nameService.addFemaleFirstName("Anna");
-        } catch (IllegalArgumentException e) {
+            nameService.addFemaleFirstName("Lisa");
+            nameService.addMaleFirstName("Mathew");
+        } catch (DuplicateNameException e) {
             System.err.println(e.getMessage());
         }
     }
