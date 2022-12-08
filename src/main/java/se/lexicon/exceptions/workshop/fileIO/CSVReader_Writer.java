@@ -2,6 +2,7 @@ package se.lexicon.exceptions.workshop.fileIO;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,6 +36,8 @@ public class CSVReader_Writer {
             Path path = Paths.get("firstname_males.txt");
             reader = newBufferedReader(path);
             return readToList(reader);
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found exception occurs");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         } finally {
@@ -44,6 +47,7 @@ public class CSVReader_Writer {
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
+
         }
         return Collections.emptyList();
     }
@@ -57,6 +61,8 @@ public class CSVReader_Writer {
         Path path = Paths.get("firstname_female.txt");
         try (BufferedReader reader = newBufferedReader(path)) {
             return readToList(reader);
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found exception occurs");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -86,6 +92,8 @@ public class CSVReader_Writer {
                 writer.append(toWrite + ",");
             }
             writer.flush();
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found exception occurs");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -98,6 +106,8 @@ public class CSVReader_Writer {
                 writer.append(toWrite + ",");
             }
             writer.flush();
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found exception occurs");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -112,6 +122,8 @@ public class CSVReader_Writer {
                 writer.append(toWrite + ",");
             }
             writer.flush();
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found exception occurs");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

@@ -3,6 +3,7 @@ package se.lexicon.exceptions.workshop;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import se.lexicon.exceptions.workshop.data_access.DuplicateNameException;
 import se.lexicon.exceptions.workshop.data_access.NameService;
 import se.lexicon.exceptions.workshop.domain.Person;
@@ -15,20 +16,15 @@ public class Main {
         List<String> lastNames = new ArrayList<>();
         try {
             lastNames = CSVReader_Writer.getLastNames();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-
-        NameService nameService;
-        try {
-            nameService = new NameService(maleFirstNames, femaleFirstNames, lastNames);
+            NameService nameService = new NameService(maleFirstNames, femaleFirstNames, lastNames);
             Person test = nameService.getNewRandomPerson();
             System.out.println(test);
-
             nameService.addFemaleFirstName("Lisa");
-            nameService.addMaleFirstName("Mathew");
-        } catch (DuplicateNameException e) {
-            System.err.println(e.getMessage());
+            nameService.addMaleFirstName("Khan");
+        } catch (DuplicateNameException | IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

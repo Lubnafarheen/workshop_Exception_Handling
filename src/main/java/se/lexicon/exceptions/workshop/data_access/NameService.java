@@ -61,7 +61,7 @@ public class NameService {
      *
      * @param name
      */
-    public void addFemaleFirstName(String name) throws DuplicateNameException {
+    public void addFemaleFirstName(String name) {
         if (name == null) throw new IllegalArgumentException("Name can not be null");
         if (femaleFirstNames.contains(name)) throw new DuplicateNameException("Name already exists");
         else
@@ -77,12 +77,11 @@ public class NameService {
      *
      * @param name
      */
-    public void addMaleFirstName(String name) throws DuplicateNameException {
+    public void addMaleFirstName(String name) {
         if (name == null) throw new IllegalArgumentException("Name was null");
         if (maleFirstNames.contains(name)) throw new DuplicateNameException("Name already exists");
         else
             maleFirstNames.add(name);
-
         CSVReader_Writer.saveMaleNames(maleFirstNames);
     }
 
@@ -93,7 +92,7 @@ public class NameService {
      *
      * @param lastName
      */
-    public void addLastName(String lastName) throws DuplicateNameException {
+    public void addLastName(String lastName) {
         if (lastName == null) throw new IllegalArgumentException("lastName was null");
         if (lastNames.contains(lastName)) throw new DuplicateNameException("lastName already exists");
         else

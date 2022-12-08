@@ -1,16 +1,9 @@
 package se.lexicon.exceptions.workshop.data_access;
 
-public class DuplicateNameException extends Exception {
+public class DuplicateNameException extends RuntimeException {
 
-    private final String name;
-
-
-    public DuplicateNameException(String name) {
-        super();
-        this.name = name;
+    public DuplicateNameException(String message) {
+        super(message);
     }
 
-    public String getName() {
-        return name;
-    }
 }
