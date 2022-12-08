@@ -2,10 +2,7 @@ package se.lexicon.exceptions.workshop;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
-
 import se.lexicon.exceptions.workshop.data_access.DuplicateNameException;
 import se.lexicon.exceptions.workshop.data_access.NameService;
 import se.lexicon.exceptions.workshop.domain.Person;

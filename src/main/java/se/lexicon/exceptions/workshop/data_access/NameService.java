@@ -63,11 +63,9 @@ public class NameService {
      */
     public void addFemaleFirstName(String name) throws DuplicateNameException {
         if (name == null) throw new IllegalArgumentException("Name can not be null");
-        if (femaleFirstNames.contains(name)) {
-            throw new DuplicateNameException("Name already exists");
-        } else {
+        if (femaleFirstNames.contains(name)) throw new DuplicateNameException("Name already exists");
+        else
             femaleFirstNames.add(name);
-        }
         CSVReader_Writer.saveFemaleNames(femaleFirstNames);
 
     }
@@ -81,11 +79,10 @@ public class NameService {
      */
     public void addMaleFirstName(String name) throws DuplicateNameException {
         if (name == null) throw new IllegalArgumentException("Name was null");
-        if (maleFirstNames.contains(name)) {
-            throw new DuplicateNameException("Name already exists");
-        } else {
+        if (maleFirstNames.contains(name)) throw new DuplicateNameException("Name already exists");
+        else
             maleFirstNames.add(name);
-        }
+
         CSVReader_Writer.saveMaleNames(maleFirstNames);
     }
 
@@ -97,12 +94,10 @@ public class NameService {
      * @param lastName
      */
     public void addLastName(String lastName) throws DuplicateNameException {
-        if (lastName == null) throw new IllegalArgumentException("Name was null");
-        if (lastNames.contains(lastName)) {
-            throw new DuplicateNameException("Name already exists");
-        } else {
+        if (lastName == null) throw new IllegalArgumentException("lastName was null");
+        if (lastNames.contains(lastName)) throw new DuplicateNameException("lastName already exists");
+        else
             lastNames.add(lastName);
-        }
         CSVReader_Writer.saveLastNames(lastNames);
     }
 
